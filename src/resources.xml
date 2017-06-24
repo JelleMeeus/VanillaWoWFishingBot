@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<lures>
+    <lure>
+        <itemname>
+            Shiny Bauble
+        </itemname>
+        <fishinglevelrequired>
+            0
+        </fishinglevelrequired>
+        <skillincrease>
+            25
+        </skillincrease>
+        <duration>
+            10
+        </duration>
+        <stackvalue>
+            20
+        </stackvalue>
+        <expansion>
+            vanilla
+        </expansion>
+    </lure>
+
+    <lure>
+        <itemname>
+            Nightcrawlers
+        </itemname>
+        <fishinglevelrequired>
+            50
+        </fishinglevelrequired>
+        <skillincrease>
+            50
+        </skillincrease>
+        <duration>
+            10
+        </duration>
+        <stackvalue>
+            20
+        </stackvalue>
+        <expansion>
+            vanilla
+        </expansion>
+    </lure>
+
+    <lure>
+        <itemname>
+            Aquadynamic Fish Lens
+        </itemname>
+        <fishinglevelrequired>
+            0
+        </fishinglevelrequired>
+        <skillincrease>
+            50
+        </skillincrease>
+        <duration>
+            10
+        </duration>
+        <stackvalue>
+            20
+        </stackvalue>
+        <expansion>
+            vanilla
+        </expansion>
+    </lure>
+
+    <lure>
+        <itemname>
+            Bright Baubles
+        </itemname>
+        <fishinglevelrequired>
+            100
+        </fishinglevelrequired>
+        <skillincrease>
+            75
+        </skillincrease>
+        <duration>
+            10
+        </duration>
+        <stackvalue>
+            20
+        </stackvalue>
+        <expansion>
+            vanilla
+        </expansion>
+    </lure>
+
+    <lure>
+        <itemname>
+            Aquadynamic Fish Attractor
+        </itemname>
+        <fishinglevelrequired>
+            100
+        </fishinglevelrequired>
+        <skillincrease>
+            50
+        </skillincrease>
+        <duration>
+            5
+        </duration>
+        <stackvalue>
+            20
+        </stackvalue>
+        <expansion>
+            vanilla
+        </expansion>
+    </lure>
+</lures>

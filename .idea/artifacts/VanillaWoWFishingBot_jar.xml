@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VanillaWoWFishingBot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/VanillaWoWFishingBot_jar</output-path>
+    <root id="archive" name="VanillaWoWFishingBot.jar">
+      <element id="module-output" name="VanillaWoWFishingBot" />
+    </root>
+  </artifact>
+</component>
