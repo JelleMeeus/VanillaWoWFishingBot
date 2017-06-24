@@ -1,13 +1,12 @@
 package controller.Listeners;
 
 import model.FisherMan;
-import model.Tools.CaptureRectangle;
+import model.Main;
 import model.Tools.Lang;
 import model.Tools.UITools;
 import view.mainGUI;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,9 +26,6 @@ public class SelectTooltipRegionButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JTextArea consoleOutput = main.getConsoleOutput(); /* Gets console output from gui */
         UITools.writeToConsoleWithTS(consoleOutput,Lang.EN_LABEL_SELECTINGRECTANGLE);
-
-        Rectangle screen = CaptureRectangle.getResult();  /* Calls select rectangle command */
-
         //if (screen==null) { screen = new Rectangle(); }  /* User has not selected a rectangle */
         /*
         x_coord = (int) screen.getX();
@@ -39,7 +35,8 @@ public class SelectTooltipRegionButtonListener implements ActionListener {
         */
         //UITools.writeToConsoleWithTS(consoleOutput,String.format("X:%5d Y:%5d W:%5d H:%5d\n",x_coord,y_coord, width, height));
         //TODO: rewrite manual calibrating to automaticly find tooltip coordinate
+
+        Main.callibrate();
         UITools.writeToConsoleWithTS(consoleOutput,Lang.EN_LABEL_SELECTEDRECTANGLE);
-        fisherMan.setTooltipRegion(screen);
     }
 }

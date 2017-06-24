@@ -18,8 +18,8 @@ public class ScreenCaptureWindow {
                 JScrollPane screenScroll = new JScrollPane(screenLabel);
 
                 screenScroll.setPreferredSize(new Dimension(
-                        (int)(screen.getWidth()/2),
-                        (int)(screen.getHeight()/2)));
+                        (int)(screen.getWidth()/1.3),
+                        (int)(screen.getHeight()/1.3)));
 
                 JPanel panel = new JPanel(new BorderLayout());
                 panel.add(screenScroll, BorderLayout.CENTER);
@@ -33,14 +33,13 @@ public class ScreenCaptureWindow {
 
                 screenLabel.addMouseMotionListener(new MouseMotionAdapter()
                 {
-
                     Point start = new Point();
 
                     @Override
                     public void mouseMoved(MouseEvent me) {
                         start = me.getPoint();
                         repaint(screen, screenCopy);
-                        selectionLabel.setText("Start Point: " + start);
+                        selectionLabel.setText(String.format("Start Point: [x:%d, y:%d]",start.x,start.y));
                         screenLabel.repaint();
                     }
 
@@ -67,9 +66,9 @@ public class ScreenCaptureWindow {
                 Graphics2D g = copy.createGraphics();
                 g.drawImage(orig,0,0, null);
                 if (captureRect!=null) {
-                    g.setColor(Color.RED);
+                    g.setColor(Color.BLUE);
                     g.draw(captureRect);
-                    g.setColor(new Color(255,255,255,150));
+                    g.setColor(new Color(255,255,255,100));
                     g.fill(captureRect);
                 }
                 g.dispose();

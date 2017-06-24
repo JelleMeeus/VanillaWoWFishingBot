@@ -32,8 +32,6 @@ public class FisherMan implements Runnable {
     private double scanSpeedProperty;
     private double sensitivityProperty;
 
-
-
     public void setLureLastApplied(Long lureLastApplied) {
         this.lureLastApplied = lureLastApplied;
     }
@@ -53,7 +51,6 @@ public class FisherMan implements Runnable {
     public FisherMan()
     {
         //generates default FisherMan object
-        lureAmount = 0;
         interrupted = false;
         callibrated = false;
         try {
@@ -245,18 +242,67 @@ public class FisherMan implements Runnable {
      * the fishing bobber. Calibration must be correct for this to work.
      * @return - True if the bobber was located, false if otherwise.
      */
+    private boolean scan_mod()
+    {
+        final double RANGE_SCALE = 0.3, HALF = 0.5;
+        /* Variables to help us navigate across the user's screen. */
+        final int DELAY_TIME = 3000; //TODO: option in case running wow in virtual machine to increase this delay
+         /* Loop through RANGE_SCALE% of the user's display. */
+        final int WIDTH = (int) bobberRegion.getWidth();
+        final int HEIGHT = (int) bobberRegion.getHeight();
+        final int Y_START = (int) bobberRegion.getY();
+        final int Y_END = (int) (bobberRegion.getY() + bobberRegion.getHeight());
+        final int X_START = (int) bobberRegion.getX();
+        final int X_END = (int) (bobberRegion.getX() + bobberRegion.getWidth());
+        final int X_PIX_SKIP = (int) ((X_END - X_START)/32.0);
+        final int Y_PIX_SKIP = (int) ((Y_END - Y_START)/31.0);
+
+        /* Reset the mouse position so we don't accidentally hover over the bobber again. */
+        robot.mouseMove(0, 0);
+        /* For users with slower computers. Their GPU needs time to load the bobber in. */
+        sleep(DELAY_TIME);
+
+        /* Loop through the center portion of the user's screen. */
+        for (int y = Y_START; y < Y_END; y += Y_PIX_SKIP)
+            for (int x = X_START; x < X_END; x += X_PIX_SKIP)
+            {
+                if (interrupted) return false;
+                /* Move the mouse in hopes that we will be over the bobber. */
+                robot.mouseMove(x, y);
+                /* Wait for the user's GPU to load the tooltip in. */
+                sleep((long) scanSpeedProperty);
+                /* If the color at the tooltip location matches what colors that
+                   we know the tooltip is, then we found the bobber. */
+                final Color pixelColor = robot.getPixelColor(pntTooltipLocation.x, pntTooltipLocation.y);
+                if (colorIsTooltip(pixelColor))
+                    return true;
+            }
+        return false;
+    }
+
+    /**
+     * Search the user's display for the fishing bobber.
+     * Grab the mouse and move it across a grid of x,y locations.
+     * If a tooltip appears, that must mean we have hovered over
+     * the fishing bobber. Calibration must be correct for this to work.
+     * @return - True if the bobber was located, false if otherwise.
+     */
     private boolean scan()
     {
         final double RANGE_SCALE = 0.3, HALF = 0.5;
 
         //TODO: Use Rectangle Bobber select instead of this method.
         /* Variables to help us navigate across the user's screen. */
-        final int DELAY_TIME = 2000,
-                /* Loop through RANGE_SCALE% of the user's display. */
-                WIDTH = USER_MAIN_DISPLAY.getWidth(), HEIGHT = USER_MAIN_DISPLAY.getHeight(),
-                Y_START = (int)(HEIGHT * HALF), Y_END = (int)(HEIGHT * (1 - RANGE_SCALE)),
-                X_START = (int)(WIDTH * RANGE_SCALE), X_END = (int)(WIDTH * (1 - RANGE_SCALE)),
-                X_PIX_SKIP = WIDTH / 42, Y_PIX_SKIP = HEIGHT / 72;
+        final int DELAY_TIME = 2000;
+         /* Loop through RANGE_SCALE% of the user's display. */
+        final int WIDTH = USER_MAIN_DISPLAY.getWidth();
+        final int HEIGHT = USER_MAIN_DISPLAY.getHeight();
+        final int Y_START = (int)(HEIGHT * HALF);
+        final int Y_END = (int)(HEIGHT * (1 - RANGE_SCALE));
+        final int X_START = (int)(WIDTH * RANGE_SCALE);
+        final int X_END = (int)(WIDTH * (1 - RANGE_SCALE));
+        final int X_PIX_SKIP = WIDTH / 42;
+        final int Y_PIX_SKIP = HEIGHT / 72;
 
         /* Reset the mouse position so we don't accidentally hover over the bobber again. */
         robot.mouseMove(0, 0);
@@ -488,6 +534,44 @@ public class FisherMan implements Runnable {
      * If found, the point at which it was found at is saved and thus the program is calibrated.
      * @return - Whether or not the Tooltip was found.
      */
+    public boolean callibrateauto(BufferedImage screenShot)
+    {
+        /*Coordinates upperLeft and bottomRight that define a Rectangle in which the tooltip might be*/
+        Point upperLeft;
+        Point bottomRight;
+        upperLeft = new Point(
+                (int)getTooltipRegion().getX(),
+                (int)(getTooltipRegion().getY())
+        );
+        bottomRight = new Point(
+                (int)(getTooltipRegion().getX() + getTooltipRegion().getWidth() ),
+                (int)(getTooltipRegion().getY() + getTooltipRegion().getHeight())
+        );
+
+        UITools.writeToConsoleWithTS(getConsoleTextArea(),
+                String.format("Coords x %d y %d ; x %d y %d",upperLeft.x,upperLeft.y,bottomRight.x,bottomRight.y)
+        );
+
+        for (int y = upperLeft.y; y < bottomRight.y; y++)
+            for (int x = upperLeft.x; x < bottomRight.x ; x++)
+            {
+                //System.out.println(String.format("x %d y %d",x,y));
+                Color pixelColor = parseByteColor(screenShot.getRGB(x, y));
+                if (colorIsTooltip(pixelColor))
+                {
+                    /* Set this location as the location of the Fishing Bobber tooltip. */
+                    pntTooltipLocation = new Point(x, y);
+                    UITools.writeToConsoleWithTS(getConsoleTextArea(),
+                            String.format("TooltipLocation x %d y %d ",pntTooltipLocation.x,pntTooltipLocation.y)
+                    );
+                    setCallibrated(true);
+                    return true;
+                }
+            }
+        setCallibrated(false);
+        return false;
+    }
+
     public boolean callibrate()
     {
         final int PREP_TIME = 1500;

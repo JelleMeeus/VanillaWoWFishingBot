@@ -1,7 +1,6 @@
 package controller.Listeners;
 
 import model.FisherMan;
-import model.Tools.CaptureRectangle;
 import model.Tools.Lang;
 import model.Tools.UITools;
 import view.mainGUI;
@@ -10,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static controller.Listeners.CaptureRectangle.getInstance;
 
 /**
  * Created by jelle on 23-6-2017.
@@ -33,8 +34,7 @@ public class SelectBobberRegionButtonListener implements ActionListener {
         JTextArea consoleOutput = main.getConsoleOutput(); /* Gets console output from gui */
 
         UITools.writeToConsoleWithTS(consoleOutput,Lang.EN_LABEL_SELECTINGBOBBER);
-
-        Rectangle screen = CaptureRectangle.getResult();  /* Calls select rectangle command */
+        Rectangle screen = getInstance().getResult();  /* Calls select rectangle command */
         /*if (screen==null) { screen = new Rectangle(); } */  /* User has not selected a rectangle */
         /*
         x_coord = (int) screen.getX();

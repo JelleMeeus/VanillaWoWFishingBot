@@ -189,5 +189,44 @@
   
   <target name="build.modules" depends="init, clean, compile.module.vanillawowfishingbot" description="build all modules"/>
   
-  <target name="all" depends="build.modules" description="build all"/>
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.emptybottest" value="${basedir}/out/artifacts/emptybottest"/>
+    <property name="artifact.output.vanillawowfishingbot:jar" value="${basedir}/out/artifacts/VanillaWoWFishingBot_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.emptybottest.jar" value="${artifacts.temp.dir}/emptybottest.jar"/>
+    <property name="temp.jar.path.VanillaWoWFishingBot.jar" value="${artifacts.temp.dir}/VanillaWoWFishingBot.jar"/>
+  </target>
+  
+  <target name="artifact.emptybottest" depends="init.artifacts" description="Build &#39;emptybottest&#39; artifact">
+    <property name="artifact.temp.output.emptybottest" value="${artifacts.temp.dir}/emptybottest"/>
+    <mkdir dir="${artifact.temp.output.emptybottest}"/>
+    <jar destfile="${temp.jar.path.emptybottest.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain"/>
+    <copy file="${temp.jar.path.emptybottest.jar}" tofile="${artifact.temp.output.emptybottest}/emptybottest.jar"/>
+  </target>
+  
+  <target name="artifact.vanillawowfishingbot:jar" depends="init.artifacts, compile.module.vanillawowfishingbot" description="Build &#39;VanillaWoWFishingBot:jar&#39; artifact">
+    <property name="artifact.temp.output.vanillawowfishingbot:jar" value="${artifacts.temp.dir}/VanillaWoWFishingBot_jar"/>
+    <mkdir dir="${artifact.temp.output.vanillawowfishingbot:jar}"/>
+    <jar destfile="${temp.jar.path.VanillaWoWFishingBot.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${vanillawowfishingbot.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.VanillaWoWFishingBot.jar}" tofile="${artifact.temp.output.vanillawowfishingbot:jar}/VanillaWoWFishingBot.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.emptybottest, artifact.vanillawowfishingbot:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.emptybottest}"/>
+    <copy todir="${artifact.output.emptybottest}">
+      <fileset dir="${artifact.temp.output.emptybottest}"/>
+    </copy>
+    <mkdir dir="${artifact.output.vanillawowfishingbot:jar}"/>
+    <copy todir="${artifact.output.vanillawowfishingbot:jar}">
+      <fileset dir="${artifact.temp.output.vanillawowfishingbot:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 </project>

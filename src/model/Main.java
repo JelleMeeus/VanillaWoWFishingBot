@@ -1,7 +1,8 @@
 package model;
-import model.Tools.Lang;
-import model.Tools.UITools;
+import controller.Listeners.CaptureRectangle;
 import view.*;
+
+import java.awt.*;
 
 public class Main {
    private static Thread thdFishing;
@@ -20,7 +21,9 @@ public class Main {
     {
        new Thread(new Runnable() {
             public void run() {
-                fisherMan.callibrate();
+                Rectangle screen = CaptureRectangle.getInstance().getResult();
+                fisherMan.setTooltipRegion(screen);
+                fisherMan.callibrateauto(CaptureRectangle.getInstance().getScreenShot());
             }
         }).start();
     }
