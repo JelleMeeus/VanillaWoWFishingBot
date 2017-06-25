@@ -354,7 +354,7 @@ public class FisherMan implements Runnable {
         final int Y_PIX_SKIP = (int) ((Y_END - Y_START)/y_steps);
 
         /* Reset the mouse position so we don't accidentally hover over the bobber again. */
-        robot.mouseMove(0, 0);
+        robot.mouseMove( (int) bobberRegion.getX(), (int) bobberRegion.getY());
         /* For users with slower computers. Their GPU needs time to load the bobber in. */
         sleep(DELAY_TIME);
 
