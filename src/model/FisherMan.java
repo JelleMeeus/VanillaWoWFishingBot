@@ -2,7 +2,11 @@ package model;
 
 import model.Tools.Lang;
 import model.Tools.UITools;
+import org.w3c.dom.css.Rect;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Port;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -31,6 +35,30 @@ public class FisherMan implements Runnable {
     Point pntTooltipLocation;
     private double scanSpeedProperty;
     private double sensitivityProperty;
+
+    public void setVolumeValue(double volumeValue) {
+        this.volumeValue = volumeValue;
+    }
+
+    private double volumeValue;
+
+    private Rectangle volumeRegion;
+    private boolean useVolumeDetection;
+
+    public void setUseVolumeDetection(boolean useVolumeDetection) {
+        this.useVolumeDetection = useVolumeDetection;
+    }
+
+    private double x_steps;
+    private double y_steps;
+
+    public void setX_steps(double x_steps) {
+        this.x_steps = x_steps;
+    }
+
+    public void setY_steps(double y_steps) {
+        this.y_steps = y_steps;
+    }
 
     public void setLureLastApplied(Long lureLastApplied) {
         this.lureLastApplied = lureLastApplied;
@@ -113,7 +141,7 @@ public class FisherMan implements Runnable {
         {
             sensitivityProperty = 1;
         }
-        this.sensitivityProperty = ( 250.0 / sensitivityProperty);
+        this.sensitivityProperty = ( sensitivityProperty / 100.0 );
     }
 
     public double getSensitivityProperty() {
@@ -215,16 +243,34 @@ public class FisherMan implements Runnable {
             };
             UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_CAST_FISHING);
             typeStr(Lang.EN_CAST_FISHING);
-            if (scan())
+
+
+            if (scan_mod())
             {
-                if ( reelIn() )
+                if (useVolumeDetection)
                 {
-                    UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_MSG_FISH_CAUGHT);
+                    //Todo: rewrite this ugly if statement
+                    if ( reelInVolume() )
+                    {
+                        UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_MSG_FISH_CAUGHT);
+                    }
+                    else
+                    {
+                        UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_ERROR_SPLASH_MISSING);
+                    }
                 }
                 else
                 {
-                    UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_ERROR_SPLASH_MISSING);
+                    if ( reelIn() )
+                    {
+                        UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_MSG_FISH_CAUGHT);
+                    }
+                    else
+                    {
+                        UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_ERROR_SPLASH_MISSING);
+                    }
                 }
+
             }
             else
             {
@@ -233,6 +279,47 @@ public class FisherMan implements Runnable {
 
             sleep(BASE_SLEEP + fluctuate((long) (DELAY_VARIANCE * Math.random())));
         }
+    }
+
+    private boolean reelInVolume()
+    {
+        final Point mouse = MouseInfo.getPointerInfo().getLocation();
+        final long START_TS = System.currentTimeMillis(), GIVE_UP_TS = 26000;
+        final int CPU_DELAY = 25;
+        /* If the user moves his mouse, then we will still have memory of the right coordinates. */
+        final int MOUSE_X = mouse.x, MOUSE_Y = mouse.y;
+        final int VOLUME_X = volumeRegion.x, VOLUME_Y = volumeRegion.y;
+
+        /* As long as the in-game cast is still going, there's hope of catching the fish. */
+        while (!interrupted && !timePassed(START_TS, GIVE_UP_TS))
+        {
+            /* Sleep to prevent max-CPU usage. */
+            sleep(CPU_DELAY);
+            /* Find the average blue where the mouse is */
+
+            if ( debugMode)
+                UITools.writeToConsoleWithTS(getConsoleTextArea(),
+                       "Amount of green: ");
+
+            if ( colorIsVolume( robot.getPixelColor( VOLUME_X , VOLUME_Y )))
+            {
+                /* Shift right click to loot the fish. */
+                robot.mouseMove(MOUSE_X, MOUSE_Y);
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+                robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean colorIsVolume(final Color c)
+    {
+        return c.getRed() < 60
+                && c.getGreen() > 175
+                && c.getBlue() < 60;
     }
 
     /**
@@ -244,9 +331,8 @@ public class FisherMan implements Runnable {
      */
     private boolean scan_mod()
     {
-        final double RANGE_SCALE = 0.3, HALF = 0.5;
         /* Variables to help us navigate across the user's screen. */
-        final int DELAY_TIME = 3000; //TODO: option in case running wow in virtual machine to increase this delay
+        final int DELAY_TIME = 7000; //TODO: option in case running wow in virtual machine to increase this delay
          /* Loop through RANGE_SCALE% of the user's display. */
         final int WIDTH = (int) bobberRegion.getWidth();
         final int HEIGHT = (int) bobberRegion.getHeight();
@@ -254,8 +340,8 @@ public class FisherMan implements Runnable {
         final int Y_END = (int) (bobberRegion.getY() + bobberRegion.getHeight());
         final int X_START = (int) bobberRegion.getX();
         final int X_END = (int) (bobberRegion.getX() + bobberRegion.getWidth());
-        final int X_PIX_SKIP = (int) ((X_END - X_START)/32.0);
-        final int Y_PIX_SKIP = (int) ((Y_END - Y_START)/31.0);
+        final int X_PIX_SKIP = (int) ((X_END - X_START)/x_steps);
+        final int Y_PIX_SKIP = (int) ((Y_END - Y_START)/y_steps);
 
         /* Reset the mouse position so we don't accidentally hover over the bobber again. */
         robot.mouseMove(0, 0);
@@ -375,6 +461,47 @@ public class FisherMan implements Runnable {
         return false;
     }
 
+    private boolean reelIn_mod()
+    {
+        final Point mouse = MouseInfo.getPointerInfo().getLocation();
+        final long START_TS = System.currentTimeMillis(), GIVE_UP_TS = 26000;
+        final int CPU_DELAY = 25;
+        /* If the user moves his mouse, then we will still have memory of the right coordinates. */
+        final int MOUSE_X = mouse.x, MOUSE_Y = mouse.y;
+
+        /* Determine how much blue there WAS at the start of this cycle. */
+        final double ctrlBlue = avgBlueProximity(MOUSE_X, MOUSE_Y);
+
+        /* As long as the in-game cast is still going, there's hope of catching the fish. */
+        while (!interrupted && !timePassed(START_TS, GIVE_UP_TS))
+        {
+            /* Sleep to prevent max-CPU usage. */
+            sleep(CPU_DELAY);
+            /* Find the average blue where the mouse is */
+            final double avgBlue = avgBlueProximity(MOUSE_X, MOUSE_Y);
+            final double diff = Math.abs(ctrlBlue - avgBlue);
+            if ( debugMode)
+                UITools.writeToConsoleWithTS(getConsoleTextArea(),
+                        Lang.EN_DEBUG_COLOR_THRESH.replaceFirst("%1",
+                                String.format("%.2f", diff))
+                                .replaceFirst("%2", String.format("%.2f", sensitivityProperty)));
+
+            /* If the difference in blue changed enough, the bobber just splashed! */
+            if (Math.abs(ctrlBlue - avgBlue) >= sensitivityProperty)
+            {
+                /* Shift right click to loot the fish. */
+                robot.mouseMove(MOUSE_X, MOUSE_Y);
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+                robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Searches in a 360 degree sweep of all nearby pixels that
      * are within `RADIUS` units. At each pixel, read the RGB
@@ -422,11 +549,19 @@ public class FisherMan implements Runnable {
     {
         //TODO: test applyLure()
         //TODO: test if /use lure works
-        UITools.writeToConsoleWithTS(getConsoleTextArea(), Lang.EN_MSG_LURE_APPLY.concat(getLure().getName()));
-        UITools.writeToConsoleWithTS(getConsoleTextArea(), Lang.EN_GRAB_POLE);
-        typeStr(Lang.EN_USE);
+        if (isDebugMode())
+        {
+            UITools.writeToConsoleWithTS(getConsoleTextArea(),"Applying Lure");
+        }
+        typeStr(Lang.EN_USE.concat(getLure().getName()));
+        UITools.writeToConsoleWithTS(getConsoleTextArea(), Lang.EN_MSG_LURE_APPLY);
+        typeStr(Lang.EN_GRAB_POLE);
         sleep(LURE_SLEEP);
         lureLastApplied = System.currentTimeMillis();
+        if (isDebugMode())
+        {
+            UITools.writeToConsoleWithTS(getConsoleTextArea(),"Lure Applied");
+        }
     }
 
     /*checks wheter or not lure should be applied*/
@@ -562,12 +697,16 @@ public class FisherMan implements Runnable {
                     /* Set this location as the location of the Fishing Bobber tooltip. */
                     pntTooltipLocation = new Point(x, y);
                     UITools.writeToConsoleWithTS(getConsoleTextArea(),
-                            String.format("TooltipLocation x %d y %d ",pntTooltipLocation.x,pntTooltipLocation.y)
+                            String.format("TooltipLocation x %d y %d  \n %s",
+                                    pntTooltipLocation.x,
+                                    pntTooltipLocation.y,
+                                    Lang.EN_MSG_CALIBRATE_SUCCESS)
                     );
                     setCallibrated(true);
                     return true;
                 }
             }
+        UITools.writeToConsoleWithTS(getConsoleTextArea(),Lang.EN_MSG_CALIBRATE_FAIL);
         setCallibrated(false);
         return false;
     }
@@ -634,7 +773,7 @@ public class FisherMan implements Runnable {
     private boolean colorIsTooltip(final Color c)
     {
         return c.getRed() > 200
-                && c.getGreen() > 180 //was 200
+                && c.getGreen() > 200 //was 200
                 && c.getBlue() < 50;
     }
 
@@ -674,5 +813,9 @@ public class FisherMan implements Runnable {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final BufferedImage screen = robot.createScreenCapture(new Rectangle(screenSize));
         return screen;
+    }
+
+    public void setVolumeRegion(Rectangle volumeRegion) {
+        this.volumeRegion = volumeRegion;
     }
 }

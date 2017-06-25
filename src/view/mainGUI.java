@@ -54,6 +54,12 @@ public class mainGUI extends JFrame {
     private JSpinner spinner2;
     private JSpinner spinner3;
     private JButton buttonSelectBobberRegionButton;
+    private JSpinner spinnerVerticalSteps;
+    private JSpinner spinnerHorizontalSteps;
+    private JCheckBox enableVolumeDetectionCheckBox;
+    private JSlider sliderVolume;
+    private JButton selectVolumeRegionButton;
+    private JTextField textFieldMinDelay;
 
     public mainGUI(FisherMan fisherMan){
         this.fisherMan = fisherMan;
@@ -67,7 +73,6 @@ public class mainGUI extends JFrame {
         DefaultCaret caret = (DefaultCaret) textAreaConsoleOutput.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-
         setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
         setVisible(true);
         setTitle(WINDOW_TITLE);
@@ -78,6 +83,15 @@ public class mainGUI extends JFrame {
         addActionListeners();
 
         };
+
+    public JSpinner getSpinnerVerticalSteps() {
+        return spinnerVerticalSteps;
+    }
+
+    public JSpinner getSpinnerHorizontalSteps() {
+        return spinnerHorizontalSteps;
+    }
+
     private void addActionListeners(){
         buttonStart.addActionListener(new StartButtonListener(this,fisherMan));
         buttonStop.addActionListener(new StopButtonListener(this, fisherMan));
@@ -88,6 +102,12 @@ public class mainGUI extends JFrame {
         checkBoxAlwaysOnTop.addItemListener(new AlwaysOnTopButtonListener(this));
         sliderSensitivity.addChangeListener(new SliderListener(this,fisherMan));
         sliderSpeed.addChangeListener(new SliderListener(this,fisherMan));
+
+        selectVolumeRegionButton.addActionListener(new VolumeSelectListener(this,fisherMan));
+
+        spinnerHorizontalSteps.setValue(32);
+        spinnerVerticalSteps.setValue(31);
+
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
                 .addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -121,11 +141,19 @@ public class mainGUI extends JFrame {
         return sliderSensitivity;
     }
 
+    public JCheckBox getCheckBoxEnableVolumeDetection() {
+        return enableVolumeDetectionCheckBox;
+    }
+    public JSlider getSliderVolume() {
+        return sliderVolume;
+    }
+
     public JSlider getSliderSpeed() {
         return sliderSpeed;
     }
 
-    public JSpinner getSpinnerAmountOfLures() {
+    public JSpinner getSpinnerAmountOfLures(){
         return spinnerAmountOfLures;
     }
+    public JTextField getTextFieldMinDelay(){return textFieldMinDelay;}
 }

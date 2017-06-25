@@ -17,11 +17,17 @@ Undetectable fishing bot for the vanilla version of World of Warcraft. Other ver
  
 -  [ ] Actions when finished: Enable to logoff/shutdown pc/close client when the fishing process is complete
 
+-  [ ] Anti-afk
+
 ## Work to be done
 
 - [x] Core functionality
 
-- [ ] Clean up
+- [ ] Clean up code
+
+- [ ] Add splash detection option to audio
+
+- [ ] Add option to set amount of steps
 
 - [ ] Add convenient features listed under Basic Features
 

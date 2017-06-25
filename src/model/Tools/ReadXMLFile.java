@@ -12,12 +12,14 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class ReadXMLFile implements XMLReadI {
     private Document doc;
     public ReadXMLFile()
     {
-        File file = new File("C:\\Users\\jelle\\Documents\\IntelliJ\\VanillaWoWFishingBot\\src\\resources.xml");
+        InputStream in = getClass().getResourceAsStream("/resources/resources.xml");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = null;
         try {
@@ -26,7 +28,7 @@ public class ReadXMLFile implements XMLReadI {
             e.printStackTrace();
         }
         try {
-            Document document = db.parse(file);
+            Document document = db.parse(in);
             doc = document;
         } catch (SAXException e) {
             e.printStackTrace();

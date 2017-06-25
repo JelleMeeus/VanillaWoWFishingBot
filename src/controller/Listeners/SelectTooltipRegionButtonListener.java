@@ -26,15 +26,6 @@ public class SelectTooltipRegionButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JTextArea consoleOutput = main.getConsoleOutput(); /* Gets console output from gui */
         UITools.writeToConsoleWithTS(consoleOutput,Lang.EN_LABEL_SELECTINGRECTANGLE);
-        //if (screen==null) { screen = new Rectangle(); }  /* User has not selected a rectangle */
-        /*
-        x_coord = (int) screen.getX();
-        y_coord = (int) screen.getY();
-        width = (int) screen.getWidth();
-        height = (int) screen.getHeight();
-        */
-        //UITools.writeToConsoleWithTS(consoleOutput,String.format("X:%5d Y:%5d W:%5d H:%5d\n",x_coord,y_coord, width, height));
-        //TODO: rewrite manual calibrating to automaticly find tooltip coordinate
 
         Main.callibrate();
         UITools.writeToConsoleWithTS(consoleOutput,Lang.EN_LABEL_SELECTEDRECTANGLE);

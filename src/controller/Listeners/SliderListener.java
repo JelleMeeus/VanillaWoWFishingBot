@@ -29,10 +29,15 @@ public class SliderListener implements ChangeListener {
         if (fisherMan.isDebugMode())
         {
             UITools.writeToConsoleWithTS( main.getConsoleOutput(),
-                    String.format("Debug Sensitivity: 3f2\n Delay: %d",
+                    String.format("Debug Sensitivity: %s\n Delay: %s",
                             fisherMan.getSensitivityProperty(),
                             fisherMan.getScanSpeedProperty()));
         }
+        //TODO: formula, update
+        int valueHorizontalSteps = (int) main.getSpinnerHorizontalSteps().getValue();
+        int valueVerticalSteps = (int) main.getSpinnerVerticalSteps().getValue();
+        double value = 1.2 * 22000 / (valueHorizontalSteps * valueVerticalSteps);
 
-    }
+        main.getTextFieldMinDelay().setText(String.format("%3f2",value));
+     }
 }

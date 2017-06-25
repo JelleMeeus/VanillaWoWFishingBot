@@ -23,14 +23,12 @@ public class StartButtonListener implements ActionListener {
         this.main = main;
         this.fisherMan = fisherMan;
         this.thdFishing = null;
-
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         JTextArea consoleOutput = main.getConsoleOutput();
         UITools.writeToConsoleWithTS(consoleOutput, "Attempting to " + Lang.EN_NODE_START);
         //TODO: Change values, validate, check, transform
-        //fisherMan.setConsoleTextArea(consoleOutput);
         fisherMan.setInterrupted(false);
         fisherMan.setLure( (Lure)main.getComboBoxLureSelection().getSelectedItem() );
         fisherMan.setLureAmount( (int)main.getSpinnerAmountOfLures().getValue() );
@@ -39,6 +37,10 @@ public class StartButtonListener implements ActionListener {
         fisherMan.setLureLastApplied(null);
         fisherMan.setScanSpeedProperty( main.getSliderSpeed().getValue()  );
         fisherMan.setSensitivityProperty( main.getSliderSensitivity().getValue() );
+        fisherMan.setX_steps((  Integer.parseInt( main.getSpinnerHorizontalSteps().getValue().toString() )));
+        fisherMan.setUseVolumeDetection( main.getCheckBoxEnableVolumeDetection().isSelected() );
+        fisherMan.setY_steps(  Integer.parseInt( main.getSpinnerVerticalSteps().getValue().toString() ));
+
         boolean error = true;
         if (thdFishing != null && thdFishing.isAlive())
             UITools.writeToConsoleWithTS(main.getConsoleOutput(),Lang.EN_ERROR_ALREADY_FISHING);
