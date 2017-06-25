@@ -1,7 +1,6 @@
 package view;
 
 import controller.Listeners.*;
-import javafx.scene.control.Slider;
 import model.FisherMan;
 import model.Lure;
 import model.LureFactory;
@@ -60,6 +59,9 @@ public class mainGUI extends JFrame {
     private JSlider sliderVolume;
     private JButton selectVolumeRegionButton;
     private JTextField textFieldMinDelay;
+    private JSpinner spinnerCPUDelay;
+    private JSpinner spinnerDelayScanVolume;
+    private JSpinner spinnerTypeDelayValue;
 
     public mainGUI(FisherMan fisherMan){
         this.fisherMan = fisherMan;
@@ -67,7 +69,6 @@ public class mainGUI extends JFrame {
         textAreaConsoleOutput.setEditable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(rootPanel);
-        //list1.setListData( comboItemsArray);
         comboBoxLureSelection.setModel(new DefaultComboBoxModel(comboItemsArray));
 
         DefaultCaret caret = (DefaultCaret) textAreaConsoleOutput.getCaret();
@@ -82,7 +83,7 @@ public class mainGUI extends JFrame {
         /*addActionListeners*/
         addActionListeners();
 
-        };
+        }
 
     public JSpinner getSpinnerVerticalSteps() {
         return spinnerVerticalSteps;
@@ -90,6 +91,14 @@ public class mainGUI extends JFrame {
 
     public JSpinner getSpinnerHorizontalSteps() {
         return spinnerHorizontalSteps;
+    }
+
+    public JSpinner getSpinnerCPUDelay() {
+        return spinnerCPUDelay;
+    }
+
+    public JSpinner getSpinnerDelayScanVolume() {
+        return spinnerDelayScanVolume;
     }
 
     private void addActionListeners(){
@@ -105,9 +114,11 @@ public class mainGUI extends JFrame {
 
         selectVolumeRegionButton.addActionListener(new VolumeSelectListener(this,fisherMan));
 
-        spinnerHorizontalSteps.setValue(32);
-        spinnerVerticalSteps.setValue(31);
-
+        spinnerHorizontalSteps.setValue(16);
+        spinnerVerticalSteps.setValue(12);
+        spinnerCPUDelay.setValue(50);
+        spinnerDelayScanVolume.setValue(25);
+        spinnerTypeDelayValue.setValue(20);
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager()
                 .addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -127,15 +138,23 @@ public class mainGUI extends JFrame {
 
     }
 
+    public JSpinner getTypeDelayValue(){
+        return this.spinnerTypeDelayValue;
+    }
     public JTextArea getConsoleOutput()
     {
         return this.textAreaConsoleOutput;
-    };
-    public JCheckBox getCheckBoxEnableLure() { return this.checkBoxEnableLure;};
-    public JCheckBox getCheckBoxEnableDebug() { return this.checkBoxEnableDebug;};
-    public JCheckBox getCheckBoxAlwaysOnTop() { return this.checkBoxAlwaysOnTop;};
-    public JCheckBox getCheckBoxEnableHourMinute() {return this.checkBoxEnableHourMinute;};
-    public JComboBox getComboBoxLureSelection() { return this.comboBoxLureSelection;};
+    }
+
+    public JCheckBox getCheckBoxEnableLure() { return this.checkBoxEnableLure;}
+
+    public JCheckBox getCheckBoxEnableDebug() { return this.checkBoxEnableDebug;}
+
+    public JCheckBox getCheckBoxAlwaysOnTop() { return this.checkBoxAlwaysOnTop;}
+
+    public JCheckBox getCheckBoxEnableHourMinute() {return this.checkBoxEnableHourMinute;}
+
+    public JComboBox getComboBoxLureSelection() { return this.comboBoxLureSelection;}
 
     public JSlider getSliderSensitivity() {
         return sliderSensitivity;

@@ -1,11 +1,9 @@
 package model;
-import controller.Listeners.CaptureRectangle;
-import view.*;
-import model.Tools.Audio;
 
-import javax.sound.sampled.*;
+import controller.Listeners.CaptureRectangle;
+import view.mainGUI;
+
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Main {
    private static Thread thdFishing;

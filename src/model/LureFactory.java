@@ -1,18 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-
 import model.Tools.ReadXMLFile;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.util.ArrayList;
 
 /**
  * Created by jelle on 23-6-2017.
  */
 public class LureFactory {
-    private LureFactory(){};
+    private LureFactory(){}
+
     private static LureFactory uniqueInstance;
     private static ArrayList<Lure> lures;
     public static LureFactory getInstance(){

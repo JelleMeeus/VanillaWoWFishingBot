@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
  * Created by jelle on 24-6-2017.
  */
 public class CaptureRectangle {
-    private CaptureRectangle(){};
+    private CaptureRectangle(){}
+
     private static CaptureRectangle uniqueInstance;
     public static CaptureRectangle getInstance()
     {

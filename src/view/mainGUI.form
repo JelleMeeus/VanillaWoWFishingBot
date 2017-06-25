@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="545"/>
+      <xy x="20" y="20" width="500" height="736"/>
     </constraints>
     <properties>
       <maximumSize width="600" height="600"/>
@@ -19,16 +19,45 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="33001" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="effd6" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Options"/>
+              <tabbedpane title="Options 1"/>
             </constraints>
-            <properties>
-              <name value=""/>
-            </properties>
+            <properties/>
             <border type="none"/>
             <children>
+              <grid id="d29ac" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="Calibrate"/>
+                <children>
+                  <component id="4adf2" class="javax.swing.JButton" binding="buttonCalibrate">
+                    <constraints/>
+                    <properties>
+                      <enabled value="true"/>
+                      <text value="Calibrate"/>
+                      <toolTipText value="Reads the current tooltip values to ensure the program working properly"/>
+                      <visible value="false"/>
+                    </properties>
+                  </component>
+                  <component id="f3add" class="javax.swing.JButton" binding="buttonSelectBobberRegionButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Select Bobber Region"/>
+                    </properties>
+                  </component>
+                  <component id="15f70" class="javax.swing.JButton" binding="buttonSelectTooltipRegion">
+                    <constraints/>
+                    <properties>
+                      <text value="Select Tooltip Region"/>
+                      <toolTipText value="Select region of tooltip"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
               <grid id="c143e" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
@@ -62,76 +91,6 @@
                   </component>
                 </children>
               </grid>
-              <grid id="a10d4" binding="SlidersSpeedandSensitivity" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none"/>
-                <children>
-                  <grid id="fd827" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none" title="Scan Delay (ms)"/>
-                    <children>
-                      <component id="67ac9" class="javax.swing.JSlider" binding="sliderSpeed">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <focusable value="false"/>
-                          <majorTickSpacing value="25"/>
-                          <maximum value="300"/>
-                          <minimum value="0"/>
-                          <minorTickSpacing value="5"/>
-                          <name value="Speed Slider"/>
-                          <paintLabels value="true"/>
-                          <paintTicks value="true"/>
-                          <snapToTicks value="true"/>
-                          <toolTipText value="Select scanning speed. Decrease this slider if mouse overshoots the bobber"/>
-                          <valueIsAdjusting value="false"/>
-                          <verifyInputWhenFocusTarget value="true"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                  <grid id="5b1c2" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none" title="Sensitivity (x100)"/>
-                    <children>
-                      <component id="af84a" class="javax.swing.JSlider" binding="sliderSensitivity">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <focusable value="false"/>
-                          <majorTickSpacing value="100"/>
-                          <maximum value="1000"/>
-                          <minimum value="0"/>
-                          <minorTickSpacing value="10"/>
-                          <name value="Sensitivity Slider"/>
-                          <paintLabels value="true"/>
-                          <paintTicks value="true"/>
-                          <paintTrack value="true"/>
-                          <snapToTicks value="true"/>
-                          <toolTipText value="Select sensitivity at which a fish will be detected. Increase this slider if fish isn't being detected"/>
-                          <value value="200"/>
-                          <valueIsAdjusting value="false"/>
-                          <verifyInputWhenFocusTarget value="true"/>
-                        </properties>
-                      </component>
-                    </children>
-                  </grid>
-                </children>
-              </grid>
               <grid id="a6b53" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
@@ -158,35 +117,309 @@
                   </component>
                 </children>
               </grid>
-              <grid id="d29ac" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+              <grid id="a10d4" binding="SlidersSpeedandSensitivity" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <grid id="fd827" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="Bobber Detection: Scan Delay (ms)"/>
+                    <children>
+                      <component id="67ac9" class="javax.swing.JSlider" binding="sliderSpeed">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <focusable value="false"/>
+                          <majorTickSpacing value="25"/>
+                          <maximum value="300"/>
+                          <minimum value="0"/>
+                          <minorTickSpacing value="5"/>
+                          <name value="Speed Slider"/>
+                          <paintLabels value="true"/>
+                          <paintTicks value="true"/>
+                          <snapToTicks value="true"/>
+                          <toolTipText value="Select scanning speed. Decrease this slider if mouse overshoots the bobber"/>
+                          <valueIsAdjusting value="false"/>
+                          <verifyInputWhenFocusTarget value="true"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="33001" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Options 2"/>
+            </constraints>
+            <properties>
+              <name value=""/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="de6bb" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="Splash Detection Method 2: Volume Detection"/>
+                <children>
+                  <component id="44c1d" class="javax.swing.JButton" binding="selectVolumeRegionButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Select Volume Pixel (upper left pixel)"/>
+                    </properties>
+                  </component>
+                  <component id="82b03" class="javax.swing.JSlider" binding="sliderVolume">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <majorTickSpacing value="10"/>
+                      <minorTickSpacing value="1"/>
+                      <visible value="false"/>
+                    </properties>
+                  </component>
+                  <grid id="9629d" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="Scan Delay Volume (ms)"/>
+                    <children>
+                      <component id="c64d0" class="javax.swing.JSpinner" binding="spinnerDelayScanVolume">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="41ad4" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="Amount of steps"/>
+                <children>
+                  <grid id="57565" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="Horizontal  / vertical steps"/>
+                    <children>
+                      <component id="f9f56" class="javax.swing.JSpinner" binding="spinnerHorizontalSteps">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="1fb9a" class="javax.swing.JSpinner" binding="spinnerVerticalSteps">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="3b247" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="Max delay (recommended)"/>
+                    <children>
+                      <component id="4cbf7" class="javax.swing.JTextField" binding="textFieldMinDelay">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <editable value="false"/>
+                          <toolTipText value="Minimum delay"/>
+                        </properties>
+                      </component>
+                      <hspacer id="6737c">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </hspacer>
+                      <vspacer id="f3a58">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                      </vspacer>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="673b3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <visible value="false"/>
+                </properties>
+                <border type="none" title="CPU Delay (ms)"/>
+                <children>
+                  <component id="3f30f" class="javax.swing.JSpinner" binding="spinnerCPUDelay">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <visible value="false"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="5b1c2" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <toolTipText value="Treshold at which fish will be detected"/>
+                </properties>
+                <border type="none" title="Splash Detection Method 1: Sensitivity (x100)"/>
+                <children>
+                  <component id="af84a" class="javax.swing.JSlider" binding="sliderSensitivity">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <majorTickSpacing value="100"/>
+                      <maximum value="1000"/>
+                      <minimum value="0"/>
+                      <minorTickSpacing value="10"/>
+                      <name value="Sensitivity Slider"/>
+                      <paintLabels value="true"/>
+                      <paintTicks value="true"/>
+                      <paintTrack value="true"/>
+                      <snapToTicks value="true"/>
+                      <toolTipText value="Select sensitivity at which a fish will be detected. Increase this slider if fish isn't being detected"/>
+                      <value value="200"/>
+                      <valueIsAdjusting value="false"/>
+                      <verifyInputWhenFocusTarget value="true"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <component id="842c2" class="javax.swing.JCheckBox" binding="enableVolumeDetectionCheckBox" default-binding="true">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Enable Volume Detection/Disable Method 1"/>
+                </properties>
+              </component>
+              <grid id="43c50" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="Type Delay (ms)"/>
+                <children>
+                  <component id="c1173" class="javax.swing.JSpinner" binding="spinnerTypeDelayValue">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="a2fd3" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Info (WIP)"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="963a3" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
-                <border type="none" title="Calibrate"/>
+                <border type="none" title="About program"/>
                 <children>
-                  <component id="4adf2" class="javax.swing.JButton" binding="buttonCalibrate">
-                    <constraints/>
+                  <component id="fa783" class="javax.swing.JTextArea" binding="toDoTextArea" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
+                    </constraints>
                     <properties>
-                      <enabled value="true"/>
-                      <text value="Calibrate"/>
-                      <toolTipText value="Reads the current tooltip values to ensure the program working properly"/>
-                      <visible value="false"/>
+                      <text value="To do"/>
                     </properties>
                   </component>
-                  <component id="f3add" class="javax.swing.JButton" binding="buttonSelectBobberRegionButton">
-                    <constraints/>
+                  <hspacer id="ef84a">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <vspacer id="22c7c">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
+                </children>
+              </grid>
+              <grid id="264fc" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="About creator"/>
+                <children>
+                  <component id="fe80f" class="javax.swing.JTextArea" binding="toDoTextArea1" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="50"/>
+                      </grid>
+                    </constraints>
                     <properties>
-                      <text value="Select Bobber Region"/>
+                      <text value="To do"/>
                     </properties>
                   </component>
-                  <component id="15f70" class="javax.swing.JButton" binding="buttonSelectTooltipRegion">
-                    <constraints/>
-                    <properties>
-                      <text value="Select Tooltip Region"/>
-                      <toolTipText value="Select region of tooltip"/>
-                    </properties>
-                  </component>
+                  <hspacer id="4d47b">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </hspacer>
+                  <vspacer id="c13be">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
                 </children>
               </grid>
             </children>
@@ -194,7 +427,7 @@
           <grid id="4fbf5" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Extra Options"/>
+              <tabbedpane title="Extra Features (WIP)"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -267,185 +500,6 @@
                     </constraints>
                     <properties>
                       <text value="Enable logoff time"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-            </children>
-          </grid>
-          <grid id="a2fd3" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <tabbedpane title="Info"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <grid id="963a3" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="About program"/>
-                <children>
-                  <component id="fa783" class="javax.swing.JTextArea" binding="toDoTextArea" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="To do"/>
-                    </properties>
-                  </component>
-                  <hspacer id="ef84a">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="22c7c">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                </children>
-              </grid>
-              <grid id="264fc" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="About creator"/>
-                <children>
-                  <component id="fe80f" class="javax.swing.JTextArea" binding="toDoTextArea1" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value="To do"/>
-                    </properties>
-                  </component>
-                  <hspacer id="4d47b">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
-                  <vspacer id="c13be">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                </children>
-              </grid>
-            </children>
-          </grid>
-          <grid id="2d255" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <tabbedpane title="Advanced Options"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <grid id="41ad4" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="Step amount of steps"/>
-                <children>
-                  <grid id="57565" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none" title="Horizontal  / vertical steps"/>
-                    <children>
-                      <component id="f9f56" class="javax.swing.JSpinner" binding="spinnerHorizontalSteps">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties/>
-                      </component>
-                      <component id="1fb9a" class="javax.swing.JSpinner" binding="spinnerVerticalSteps">
-                        <constraints>
-                          <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties/>
-                      </component>
-                    </children>
-                  </grid>
-                  <grid id="3b247" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="0" left="0" bottom="0" right="0"/>
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none" title="Max delay (recommended)"/>
-                    <children>
-                      <component id="4cbf7" class="javax.swing.JTextField" binding="textFieldMinDelay">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                            <preferred-size width="150" height="-1"/>
-                          </grid>
-                        </constraints>
-                        <properties>
-                          <editable value="false"/>
-                          <toolTipText value="Minimum delay"/>
-                        </properties>
-                      </component>
-                      <hspacer id="6737c">
-                        <constraints>
-                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                      </hspacer>
-                      <vspacer id="f3a58">
-                        <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                      </vspacer>
-                    </children>
-                  </grid>
-                </children>
-              </grid>
-              <grid id="de6bb" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-                <border type="none" title="Volume Detection"/>
-                <children>
-                  <component id="44c1d" class="javax.swing.JButton" binding="selectVolumeRegionButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Select Volume Pixel"/>
-                    </properties>
-                  </component>
-                  <component id="842c2" class="javax.swing.JCheckBox" binding="enableVolumeDetectionCheckBox" default-binding="true">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Enable Volume Detection"/>
-                    </properties>
-                  </component>
-                  <component id="82b03" class="javax.swing.JSlider" binding="sliderVolume">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <majorTickSpacing value="10"/>
-                      <minorTickSpacing value="1"/>
-                      <visible value="false"/>
                     </properties>
                   </component>
                 </children>

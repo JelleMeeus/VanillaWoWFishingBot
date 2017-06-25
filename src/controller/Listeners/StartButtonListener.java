@@ -40,6 +40,8 @@ public class StartButtonListener implements ActionListener {
         fisherMan.setX_steps((  Integer.parseInt( main.getSpinnerHorizontalSteps().getValue().toString() )));
         fisherMan.setUseVolumeDetection( main.getCheckBoxEnableVolumeDetection().isSelected() );
         fisherMan.setY_steps(  Integer.parseInt( main.getSpinnerVerticalSteps().getValue().toString() ));
+        fisherMan.setCPU_DELAY_VOLUME( (int)main.getSpinnerDelayScanVolume().getValue() );
+        fisherMan.setTYPE_DELAY( (int)main.getTypeDelayValue().getValue()  );
 
         boolean error = true;
         if (thdFishing != null && thdFishing.isAlive())
