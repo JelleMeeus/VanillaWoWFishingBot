@@ -1,7 +1,13 @@
 # VanillaWoWFishingBot
-## Use
 
 Undetectable fishing bot for the vanilla version of World of Warcraft. Other versions could work, but have not been tested.
+
+## How to use
+
+1. Select bobber, tooltip region
+2. (optional) Select volume mixer pixel, turn on second method
+3. (optional) modify other options if needed
+4. press start
 
 ## Functionality
 
