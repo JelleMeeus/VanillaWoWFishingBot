@@ -25,8 +25,6 @@ Undetectable fishing bot for the vanilla version of World of Warcraft. Other ver
 
 - [x] Core functionality
 
-- [ ] Clean up code
-
 - [x] Add splash detection option with audio
 
 - [x] Add option to set amount of steps
@@ -35,9 +33,6 @@ Undetectable fishing bot for the vanilla version of World of Warcraft. Other ver
 
 - [ ] Add extra features
 
+- [ ] Clean up code
+
 - [ ] Test functionality
-
-
-## Disclaimer
-
-Inspired by project https://github.com/KevinTyrrell/FishingBot
